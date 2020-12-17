@@ -27,4 +27,5 @@
 -As feeds can go upto millions in number, then to reduce program time , data parallelism should be implemented using plinq
 -Right now, the application is error prone, so to handle this exception logging should be implemented.
 -Files needs to be validated before converting into common models to handle invalid feeds.
+-Converters can be more enhanced in form of wrappers, so that these will be more testable by using mocking techniques and injecting dependencies using setup in test cases.
 

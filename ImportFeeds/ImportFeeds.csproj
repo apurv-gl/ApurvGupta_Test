@@ -67,9 +67,9 @@
     <Compile Include="Models\ImportYaml.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Contracts\IFeed.cs" />
-    <Compile Include="Services\Implementations\FeedJson.cs" />
-    <Compile Include="Services\Implementations\FeedYaml.cs" />
+    <Compile Include="Services\Contracts\IFeedConverter.cs" />
+    <Compile Include="Services\Implementations\JsonConverter.cs" />
+    <Compile Include="Services\Implementations\YamlConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

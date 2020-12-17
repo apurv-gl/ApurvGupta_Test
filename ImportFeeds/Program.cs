@@ -26,7 +26,7 @@ namespace ImportFeeds
             {
                 using (var container = Container.For<SetupIoC>())
                 {
-                    List<Feed> feeds = feeds = container.GetInstance<IFeed>(extension).Import(filePath);
+                    List<Feed> feeds = feeds = container.GetInstance<IFeedConverter>(extension).Import(filePath);
 
                     var db = ConfigurationManager.AppSettings["Database"];
                     var dbObj = container.GetInstance<IFeedDB>(db);

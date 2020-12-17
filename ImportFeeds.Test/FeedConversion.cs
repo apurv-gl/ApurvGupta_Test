@@ -16,7 +16,7 @@ namespace ImportFeeds.Test
         [TestCase(@"D:\Apurv\ApurvGupta_Test\ImportFeeds.Test\feed-products\capterra.yaml")]
         public void CheckJsonConversion(string filePath)
         {
-            FeedJson obj = new FeedJson();
+            JsonConverter obj = new JsonConverter();
             var result = obj.Import(filePath);
             Assert.AreEqual(result.Count, 2);
             Assert.AreEqual(result[0].category.Count, 2);
@@ -29,7 +29,7 @@ namespace ImportFeeds.Test
         [TestCase(@"D:\Apurv\ApurvGupta_Test\ImportFeeds.Test\feed-products\capterra.yaml")]
         public void CheckYamlConversion(string filePath)
         {
-            FeedYaml obj = new FeedYaml();
+            YamlConverter obj = new YamlConverter();
             var result = obj.Import(filePath);
             Assert.AreEqual(result.Count, 3);
             Assert.AreEqual(result[0].category.Count, 2);

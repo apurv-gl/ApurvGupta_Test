@@ -16,8 +16,8 @@ namespace ImportFeeds.DI
                 x.TheCallingAssembly();
                 x.WithDefaultConventions();
             });
-            For<IFeed>().Use<FeedJson>().Named("json");
-            For<IFeed>().Use<FeedYaml>().Named("yaml");
+            For<IFeedConverter>().Use<JsonConverter>().Named("json");
+            For<IFeedConverter>().Use<YamlConverter>().Named("yaml");
 
             //For future extensions when csv will be in use
             //For<IFeed>().Use<FeedYaml>().Named("csv");
