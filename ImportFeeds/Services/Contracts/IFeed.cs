@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ImportFeeds.Services.Contracts
 {
-    public interface IFeed<T> where T : ImportType
+    public interface IFeed
     {
         List<Feed> Import(string filePath);
     }

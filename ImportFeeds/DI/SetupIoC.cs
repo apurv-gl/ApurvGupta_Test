@@ -16,12 +16,14 @@ namespace ImportFeeds.DI
                 x.TheCallingAssembly();
                 x.WithDefaultConventions();
             });
-            For<IFeed<ImportJson>>().Use<FeedJson>();
-            For<IFeed<ImportYaml>>().Use<FeedYaml>();
-            For<IFeedDB>().Use<FeedMySqlDB>();
+            For<IFeed>().Use<FeedJson>().Named("json");
+            For<IFeed>().Use<FeedYaml>().Named("yaml");
 
-            //This code will be uncommented when company switches to MongoDB
-            //For<IFeedDB>().Use<FeedMongoDB>();
+            //For future extensions when csv will be in use
+            //For<IFeed>().Use<FeedYaml>().Named("csv");
+
+            For<IFeedDB>().Use<FeedMySqlDB>().Named("mysql");
+            For<IFeedDB>().Use<FeedMongoDB>().Named("mongo");
         }
     }
 }

@@ -11,7 +11,7 @@ using YamlDotNet.Serialization;
 
 namespace ImportFeeds.Services.Implementations
 {
-    public class FeedYaml : IFeed<ImportYaml>
+    public class FeedYaml : IFeed
     {
         public static IMapper Mapper { get; private set; }
         public static MapperConfiguration MapperConfiguration { get; private set; }

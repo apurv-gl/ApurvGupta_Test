@@ -12,11 +12,12 @@ namespace ImportFeeds.Test
     [TestFixture]
     public class FeedConversion
     {
-        [Test]
-        public void CheckJsonConversion()
+        [TestCase(@"D:\Apurv\ApurvGupta_Test\ImportFeeds.Test\feed-products\softwareadvice.json")]
+        [TestCase(@"D:\Apurv\ApurvGupta_Test\ImportFeeds.Test\feed-products\capterra.yaml")]
+        public void CheckJsonConversion(string filePath)
         {
             FeedJson obj = new FeedJson();
-            var result = obj.Import(@"D:\Apurv\ApurvGupta_Test\ImportFeeds.Test\feed-products\softwareadvice.json");
+            var result = obj.Import(filePath);
             Assert.AreEqual(result.Count, 2);
             Assert.AreEqual(result[0].category.Count, 2);
             Assert.AreEqual(result[1].category.Count, 2);
@@ -24,11 +25,12 @@ namespace ImportFeeds.Test
             Assert.IsNull(result[1].twitter);
         }
 
-        [Test]
-        public void CheckYamlConversion()
+        [TestCase(@"D:\Apurv\ApurvGupta_Test\ImportFeeds.Test\feed-products\softwareadvice.json")]
+        [TestCase(@"D:\Apurv\ApurvGupta_Test\ImportFeeds.Test\feed-products\capterra.yaml")]
+        public void CheckYamlConversion(string filePath)
         {
             FeedYaml obj = new FeedYaml();
-            var result = obj.Import(@"D:\Apurv\ApurvGupta_Test\ImportFeeds.Test\feed-products\capterra.yaml");
+            var result = obj.Import(filePath);
             Assert.AreEqual(result.Count, 3);
             Assert.AreEqual(result[0].category.Count, 2);
             Assert.AreEqual(result[1].category.Count, 3);

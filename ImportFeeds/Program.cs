@@ -5,6 +5,8 @@ using ImportFeeds.Services.Contracts;
 using StructureMap;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 
 namespace ImportFeeds
 {
@@ -18,27 +20,31 @@ namespace ImportFeeds
             var splits = filePath.Split('.');
             var extension = splits[splits.Length - 1];
 
-            using (var container = Container.For<SetupIoC>())
+            var allowedExtensions = ConfigurationManager.AppSettings["AllowedExtensions"];
+            var allExtensions = allowedExtensions.Split(',').ToList();
+            if (allExtensions.Contains(extension))
             {
-                List<Feed> feeds = new List<Feed>();
-                if (extension == "json")
-                    feeds = container.GetInstance<IFeed<ImportJson>>().Import(filePath);
-                else if (extension == "yaml")
-                    feeds = container.GetInstance<IFeed<ImportYaml>>().Import(filePath);
-                else
-                    Console.WriteLine("File extension not supported!");
-
-                if (feeds.Count > 0)
+                using (var container = Container.For<SetupIoC>())
                 {
-                    var db = container.GetInstance<IFeedDB>();
-                    foreach (var f in feeds)
+                    List<Feed> feeds = feeds = container.GetInstance<IFeed>(extension).Import(filePath);
+
+                    var db = ConfigurationManager.AppSettings["Database"];
+                    var dbObj = container.GetInstance<IFeedDB>(db);
+                    if (feeds.Count > 0)
                     {
-                        Console.WriteLine("importing: Name: \"" + f.name + "\";  Categories: " + String.Join(",", f.category) + "; Twitter: " + f.twitter + "");
-                        db.InsertFeeds(f);
+                        foreach (var f in feeds)
+                        {
+                            Console.WriteLine("importing: Name: \"" + f.name + "\";  Categories: " + String.Join(",", f.category) + "; Twitter: " + f.twitter + "");
+                            dbObj.InsertFeeds(f);
+                        }
                     }
                 }
-                Console.ReadLine();
             }
+            else
+            {
+                Console.WriteLine("File extension not supported!");
+            }
+            Console.ReadLine();
         }
     }
 }

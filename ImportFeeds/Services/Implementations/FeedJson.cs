@@ -8,7 +8,7 @@ using System.IO;
 
 namespace ImportFeeds.Services.Implementations
 {
-    public class FeedJson : IFeed<ImportJson>
+    public class FeedJson : IFeed
     {
         public static IMapper Mapper { get; private set; }
         public static MapperConfiguration MapperConfiguration { get; private set; }
